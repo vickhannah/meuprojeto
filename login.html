@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Login -Época dourada</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Estilo customizado -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <div class="container">
+    <div class="text-center mt-5">
+      <h1 class="header-title">Época dourada</h1>
+      <p class="text-muted" style="font-style: italic;">Bem-vindo de volta! Faça login para continuar.</p>
+    </div>
+
+    <div class="row justify-content-center">
+      <div class="col-md-5 form-container">
+        <form action="index.html" method="post">
+          <div class="mb-3">
+            <label for="email" class="form-label">E-mail</label>
+            <input type="email" class="form-control" id="email" name="email" required>
+          </div>
+          <div class="mb-3">
+            <label for="senha" class="form-label">Senha</label>
+            <input type="password" class="form-control" id="senha" name="senha" required>
+          </div>
+
+          <button type="submit" class="btn btn-custom w-100">Entrar</button>
+        </form>
+
+        <p class="mt-3 text-center">
+          Não tem conta? <a href="cadastro.html" class="link-custom">Crie uma agora</a>
+        </p>
+        <p class="text-center">
+          <a href="index.html" class="link-custom">Voltar à loja</a>
+        </p>
+      </div>
+    </div>
+  </div>
+
+<script>
+  const form = document.querySelector("form");
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const email = document.getElementById("email").value;
+    const senha = document.getElementById("senha").value;
+
+    const emailSalvo = localStorage.getItem("usuarioEmail");
+    const senhaSalva = localStorage.getItem("usuarioSenha");
+
+    if (email === emailSalvo && senha === senhaSalva) {
+      alert("Login realizado com sucesso!");
+      window.location.href = "index.html"; // redireciona pra página da loja
+    } else {
+      alert("E-mail ou senha incorretos.");
+    }
+  });
+</script>
+
+
+</body>
+</html>

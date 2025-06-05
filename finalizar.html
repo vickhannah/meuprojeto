@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Finalizar Compra - Época dourada</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #f3e8dc;
+      font-family: Georgia, serif;
+      color: #4b2e2e;
+    }
+    .navbar {
+      background-color: #d9c2a3;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg mb-4">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="index.html">Loja Vintage</a>
+      <div class="ms-auto">
+        <a class="btn btn-outline-dark" href="carrinho.html">
+          Carrinho <span class="badge bg-dark" id="cart-count">0</span>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <h2 class="text-center mb-4">Finalização da Compra</h2>
+    <div id="resumo-compra" class="mb-4"></div>
+
+    <h4>Simular Frete:</h4>
+    <div class="mb-3">
+      <select class="form-select" id="regiao-frete">
+        <option disabled selected>Selecione sua região</option>
+        <option value="15">Sul - R$ 15,00</option>
+        <option value="20">Sudeste - R$ 20,00</option>
+        <option value="25">Centro-Oeste - R$ 25,00</option>
+        <option value="30">Nordeste - R$ 30,00</option>
+        <option value="35">Norte - R$ 35,00</option>
+      </select>
+    </div>
+
+    <h4>Forma de Entrega:</h4>
+    <div class="mb-4">
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="entrega" id="expressa" checked>
+        <label class="form-check-label" for="expressa">Entrega Expressa</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="entrega" id="agendada">
+        <label class="form-check-label" for="agendada">Entrega Agendada</label>
+      </div>
+      <div class="form-check mb-3">
+        <input class="form-check-input" type="radio" name="entrega" id="retirada">
+        <label class="form-check-label" for="retirada">Retirar na Loja</label>
+      </div>
+    </div>
+
+    <h4>Forma de Pagamento:</h4>
+    <form id="form-finalizar">
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="pagamento" id="pix" checked>
+        <label class="form-check-label" for="pix">PIX</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="pagamento" id="cartao">
+        <label class="form-check-label" for="cartao">Cartão de Crédito</label>
+      </div>
+      <div class="form-check mb-4">
+        <input class="form-check-input" type="radio" name="pagamento" id="boleto">
+        <label class="form-check-label" for="boleto">Boleto Bancário</label>
+      </div>
+
+      <button type="submit" class="btn btn-success">Finalizar Pedido</button>
+    </form>
+  </div>
+
+  <script>
+    const carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+    const resumo = document.getElementById("resumo-compra");
+    const regiaoFrete = document.getElementById("regiao-frete");
+    const contador = document.getElementById("cart-count");
+
+    let total = 0;
+    let frete = 0;
+
+    if (contador) contador.textContent = carrinho.length;
+
+    if (carrinho.length === 0) {
+      resumo.innerHTML = "<p>Você não possui itens no carrinho.</p>";
+    } else {
+      let html = "<ul class='list-group mb-3'>";
+      carrinho.forEach(item => {
+        const preco = parseFloat(item.preco.replace("R$", "").replace(",", "."));
+        total += preco;
+        html += `<li class="list-group-item d-flex justify-content-between">
+                  ${item.nome} <span>${item.preco}</span>
+                </li>`;
+      });
+      html += "</ul>";
+      html += `<h5 class="text-end" id="total-compra">Total: R$ ${total.toFixed(2).replace(".", ",")}</h5>`;
+      resumo.innerHTML = html;
+    }
+
+    regiaoFrete.addEventListener("change", function () {
+      frete = parseFloat(this.value);
+      const totalGeral = total + frete;
+      document.getElementById("total-compra").textContent =
+        "Total com frete: R$ " + totalGeral.toFixed(2).replace(".", ",");
+    });
+
+    document.getElementById("form-finalizar").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      if (!regiaoFrete.value) {
+        alert("Por favor, selecione uma região para calcular o frete.");
+        return;
+      }
+
+      alert("Pedido confirmado! Você receberá um e-mail com os detalhes da compra, incluindo o código de rastreio.");
+      localStorage.removeItem("carrinho");
+      window.location.href = "index.html";
+    });
+  </script>
+</body>
+</html>

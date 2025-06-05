@@ -1,0 +1,74 @@
+/* Fonte base */
+body {
+  background-color: #D9C5A0;
+  font-family: 'Georgia', serif;
+}
+
+/* Título da loja com fonte Fraktur */
+.header-title {
+  font-family: 'Georgia', cursive;
+  font-size: 3rem;
+  color: #4B3621;
+}
+
+/* Caixa do formulário */
+.form-container {
+  background-color: #ffffff;
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  margin-top: 3rem;
+}
+
+/* Botão estilizado */
+.btn-custom {
+  background-color: #8A9A5B;
+  color: rgb(92, 90, 65);
+  font-weight: bold;
+  border: none;
+}
+
+.btn-custom:hover {
+  background-color: #4B3621;
+}
+
+/* Links personalizados */
+.link-custom {
+  color: #E2725B;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.link-custom:hover {
+  text-decoration: underline;
+}
+
+/*PAGINA INDEX */
+/* Cor principal da navbar */
+.bg-marrom {
+  background-color: #5C4033; /* marrom escuro */
+}
+
+/* Cartões de produto */
+.produto-card {
+  border: 1px solid #c49406; /* bege escuro */
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+  background-color: #ca974bb0; /* fundo leve vintage */
+}
+
+/* Título da navbar */
+.navbar-brand.header-title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #faf5f0;
+  font-family: 'Georgia', serif;
+}
+
+/* Título das seções */
+h2 {
+  font-family: 'Georgia', serif;
+  color: #5a3d18;
+  font-weight: bold;
+}
+
